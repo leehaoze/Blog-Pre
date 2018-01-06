@@ -9,13 +9,13 @@
             <column name="id" sql-type="int(11)"/>
         </id>
         <property name="title">
-            <column name="title" sql-type="tinytext"/>
+            <column name="title" sql-type="tinytext" not-null="true"/>
         </property>
         <property name="url">
-            <column name="url" sql-type="text"/>
+            <column name="url" sql-type="text" not-null="true"/>
         </property>
         <property name="description">
-            <column name="description" sql-type="text" not-null="true"/>
+            <column name="description" sql-type="text" not-null="false"/>
         </property>
     </class>
 </hibernate-mapping>

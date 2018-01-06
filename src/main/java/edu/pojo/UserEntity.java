@@ -7,7 +7,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "user", schema = "blog", catalog = "")
 public class UserEntity {
-    private int id;
+    private Integer id;
     private Integer qq;
     private String password;
     private Boolean sex;
@@ -19,15 +19,15 @@ public class UserEntity {
     private String url;
     private Boolean admin;
     private Timestamp lastLogin;
-    private int heart;
+    private Integer heart;
 
     @Id
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -143,11 +143,11 @@ public class UserEntity {
 
     @Basic
     @Column(name = "heart", nullable = false)
-    public int getHeart() {
+    public Integer getHeart() {
         return heart;
     }
 
-    public void setHeart(int heart) {
+    public void setHeart(Integer heart) {
         this.heart = heart;
     }
 
@@ -156,8 +156,7 @@ public class UserEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity that = (UserEntity) o;
-        return id == that.id &&
-                heart == that.heart &&
+        return Objects.equals(id, that.id) &&
                 Objects.equals(qq, that.qq) &&
                 Objects.equals(password, that.password) &&
                 Objects.equals(sex, that.sex) &&
@@ -168,7 +167,8 @@ public class UserEntity {
                 Objects.equals(joinTime, that.joinTime) &&
                 Objects.equals(url, that.url) &&
                 Objects.equals(admin, that.admin) &&
-                Objects.equals(lastLogin, that.lastLogin);
+                Objects.equals(lastLogin, that.lastLogin) &&
+                Objects.equals(heart, that.heart);
     }
 
     @Override

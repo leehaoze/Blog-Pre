@@ -6,17 +6,17 @@ import java.util.Objects;
 @Entity
 @Table(name = "type", schema = "blog", catalog = "")
 public class TypeEntity {
-    private int id;
+    private Integer id;
     private String name;
-    private int num;
+    private Integer num;
 
     @Id
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -32,11 +32,11 @@ public class TypeEntity {
 
     @Basic
     @Column(name = "num", nullable = false)
-    public int getNum() {
+    public Integer getNum() {
         return num;
     }
 
-    public void setNum(int num) {
+    public void setNum(Integer num) {
         this.num = num;
     }
 
@@ -45,9 +45,9 @@ public class TypeEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TypeEntity that = (TypeEntity) o;
-        return id == that.id &&
-                num == that.num &&
-                Objects.equals(name, that.name);
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(num, that.num);
     }
 
     @Override

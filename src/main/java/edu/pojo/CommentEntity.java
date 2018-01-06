@@ -7,9 +7,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "comment", schema = "blog", catalog = "")
 public class CommentEntity {
-    private int id;
-    private int authorId;
-    private int articleId;
+    private Integer id;
+    private Integer authorId;
+    private Integer articleId;
     private String content;
     private Timestamp date;
     private Boolean see;
@@ -18,31 +18,31 @@ public class CommentEntity {
 
     @Id
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "author_id", nullable = false)
-    public int getAuthorId() {
+    public Integer getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(int authorId) {
+    public void setAuthorId(Integer authorId) {
         this.authorId = authorId;
     }
 
     @Basic
     @Column(name = "article_id", nullable = false)
-    public int getArticleId() {
+    public Integer getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(int articleId) {
+    public void setArticleId(Integer articleId) {
         this.articleId = articleId;
     }
 
@@ -101,9 +101,9 @@ public class CommentEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CommentEntity that = (CommentEntity) o;
-        return id == that.id &&
-                authorId == that.authorId &&
-                articleId == that.articleId &&
+        return Objects.equals(id, that.id) &&
+                Objects.equals(authorId, that.authorId) &&
+                Objects.equals(articleId, that.articleId) &&
                 Objects.equals(content, that.content) &&
                 Objects.equals(date, that.date) &&
                 Objects.equals(see, that.see) &&

@@ -8,15 +8,15 @@ import java.util.Objects;
 public class TagEntity {
     private int id;
     private String name;
-    private int num;
+    private Integer num;
 
     @Id
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -32,11 +32,11 @@ public class TagEntity {
 
     @Basic
     @Column(name = "num", nullable = false)
-    public int getNum() {
+    public Integer getNum() {
         return num;
     }
 
-    public void setNum(int num) {
+    public void setNum(Integer num) {
         this.num = num;
     }
 
@@ -45,9 +45,9 @@ public class TagEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TagEntity tagEntity = (TagEntity) o;
-        return id == tagEntity.id &&
-                num == tagEntity.num &&
-                Objects.equals(name, tagEntity.name);
+        return Objects.equals(id, tagEntity.id) &&
+                Objects.equals(name, tagEntity.name) &&
+                Objects.equals(num, tagEntity.num);
     }
 
     @Override

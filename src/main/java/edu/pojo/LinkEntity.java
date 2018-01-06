@@ -6,18 +6,18 @@ import java.util.Objects;
 @Entity
 @Table(name = "link", schema = "blog", catalog = "")
 public class LinkEntity {
-    private int id;
+    private Integer id;
     private String title;
     private String url;
     private String description;
 
     @Id
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -56,7 +56,7 @@ public class LinkEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LinkEntity that = (LinkEntity) o;
-        return id == that.id &&
+        return Objects.equals(id, that.id) &&
                 Objects.equals(title, that.title) &&
                 Objects.equals(url, that.url) &&
                 Objects.equals(description, that.description);

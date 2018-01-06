@@ -13,19 +13,19 @@ public class ArticleEntity {
     private String content;
     private Boolean from;
     private String password;
-    private int authorId;
+    private Integer authorId;
     private Integer tagId;
     private Integer typeId;
     private Timestamp date;
-    private int count;
+    private Integer count;
 
     @Id
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -81,11 +81,11 @@ public class ArticleEntity {
 
     @Basic
     @Column(name = "author_Id", nullable = false)
-    public int getAuthorId() {
+    public Integer getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(int authorId) {
+    public void setAuthorId(Integer authorId) {
         this.authorId = authorId;
     }
 
@@ -121,11 +121,11 @@ public class ArticleEntity {
 
     @Basic
     @Column(name = "count", nullable = false)
-    public int getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 
@@ -134,17 +134,17 @@ public class ArticleEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ArticleEntity that = (ArticleEntity) o;
-        return id == that.id &&
-                authorId == that.authorId &&
-                count == that.count &&
+        return Objects.equals(id, that.id) &&
                 Objects.equals(title, that.title) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(content, that.content) &&
                 Objects.equals(from, that.from) &&
                 Objects.equals(password, that.password) &&
+                Objects.equals(authorId, that.authorId) &&
                 Objects.equals(tagId, that.tagId) &&
                 Objects.equals(typeId, that.typeId) &&
-                Objects.equals(date, that.date);
+                Objects.equals(date, that.date) &&
+                Objects.equals(count, that.count);
     }
 
     @Override
