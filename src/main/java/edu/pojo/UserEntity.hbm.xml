@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="edu.pojo.UserEntity" table="user" schema="blog">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="qq">
+            <column name="qq" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="password">
+            <column name="password" sql-type="varchar(10)" length="10"/>
+        </property>
+        <property name="sex">
+            <column name="sex" sql-type="tinyint(1)" not-null="true"/>
+        </property>
+        <property name="photo">
+            <column name="photo" sql-type="text" not-null="true"/>
+        </property>
+        <property name="username">
+            <column name="username" sql-type="varchar(40)" length="40"/>
+        </property>
+        <property name="name">
+            <column name="name" sql-type="varchar(50)" length="50"/>
+        </property>
+        <property name="email">
+            <column name="email" sql-type="varchar(10)" length="10"/>
+        </property>
+        <property name="joinTime">
+            <column name="join_time" sql-type="datetime"/>
+        </property>
+        <property name="url">
+            <column name="url" sql-type="text" not-null="true"/>
+        </property>
+        <property name="admin">
+            <column name="admin" sql-type="tinyint(1)" not-null="true"/>
+        </property>
+        <property name="lastLogin">
+            <column name="last_login" sql-type="datetime" not-null="true"/>
+        </property>
+        <property name="heart">
+            <column name="heart" sql-type="int(11)"/>
+        </property>
+    </class>
+</hibernate-mapping>
