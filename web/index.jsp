@@ -28,11 +28,14 @@
         <img src="IMG/Head-pic.jpg">
     </div>
     <div>
-        <p>Leehaoze</p>
-        <p>Code & Life</p>
+        <span id="bloger-name">Leehaoze</span>
+        <span id="quoto">Code & Life</span>
     </div>
     <div id="info-footer">
-
+        <span id="qq-logo"></span>
+        <span id="github-logo"></span>
+        <span id="email-logo"></span>
+        <span id="blog-logo"></span>
     </div>
 </div>
 </body>

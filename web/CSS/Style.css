@@ -1,3 +1,14 @@
+@font-face {
+    font-family: Cookie;
+    src:url('/Fonts/Cookie-Regular.ttf')
+}
+
+@font-face {
+    font-family: Lato;
+    src:url('/Fonts/Lato-Regular.ttf')
+}
+
+
 body, html {
     padding: 0;
     margin: 0;
@@ -44,8 +55,8 @@ body, html {
 
 
     #head-pic{
-        border-radius: 15px 50px 30px;
-        background-color: green;
+        border-radius: 90px 90px 90px 90px;
+        /*background-color: green;*/
         position: relative;
         top: -18%;
         margin: 0 auto;
@@ -54,16 +65,37 @@ body, html {
         overflow: hidden;
     }
 
+    #head-pic:hover{
+        transform:perspective(300px) translate3d(0,0,20px);
+        transition:transform 0.25s;
+    }
+
         #head-pic>img{
             transform: translate(-10px,-12px);
             width: 113%;
         }
 
-    #info-footer{
-        background-color: white;
-        height: 13%;
+    #bloger-name{
+        display: block;
         position: relative;
-        top: 49%;
+        text-align: center;
+        font-family: Cookie;
+        font-size: 4.5em;
+    }
+
+    #quoto{
+        display: block;
+        text-align: center;
+        font-family: Lato;
+        font-size: 1.4em;
+    }
+
+    #info-footer{
+        background-color: dimgray;
+        height: 13%;
+        width: 100%;
+        position: absolute;
+        bottom: 0px;
     }
 
 @media screen and (max-width: 450px){
@@ -108,8 +140,7 @@ body, html {
     }
 
     #head-pic{
-        border-radius: 15px 50px 30px;
-        background-color: green;
+        border-radius: 90px 90px 90px 90px;
         position: relative;
         top: -18%;
         margin: 0 auto;
@@ -117,19 +148,11 @@ body, html {
         width: 54%;
     }
 
-    #info-footer{
-        background-color: white;
-        height: 13%;
-        position: relative;
-        top: 50%;
-    }
-
 }
 
 @media screen and (min-width: 1441px){
     #head-pic{
-        border-radius: 15px 50px 30px;
-        background-color: green;
+        border-radius: 90px 90px 90px 90px;
         position: relative;
         top: -18%;
         margin: 0 auto;
@@ -147,14 +170,9 @@ body, html {
         box-shadow: 10px 20px 10px black;
         transform: translate3d(0,0,60px);
     }
-
-    #info-footer{
-        background-color: white;
-        height: 13%;
-        position: relative;
-        top: 51%;
-    }
 }
+
+
 
 
 
