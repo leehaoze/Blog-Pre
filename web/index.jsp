@@ -28,7 +28,7 @@
         <img src="IMG/Head-pic.jpg">
     </div>
     <div>
-        <span id="bloger-name">Shaozhupeng</span>
+        <span id="bloger-name">Leehaoze</span>
         <span id="quoto">Code & Life</span>
     </div>
     <div id="info-footer">
