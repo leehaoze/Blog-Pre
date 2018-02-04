@@ -1,15 +1,7 @@
 $(function () {
     loadIndexIMG();
-    loadName();
-    loadUser();
 });
-function loadName(){
-    var name = $('#bloger-name').text();
-    var len = name.toString().length;
-    var size = 8 / len;
-    $('#bloger-name').css({'font-size':''+4.5*size+'em'});
-    console.log("Update SUCCESS");
-}
+
 
 function loadIndexIMG() {
     $.ajax({
@@ -21,16 +13,7 @@ function loadIndexIMG() {
         }
     })
 }
-function loadUser() {
-    $.ajax({
-        dataType: "json",
-        url: '/getUser.form',
-        success: function (data) {
-            console.log(data.toString());
-            console.log("get success");
-        }
-    })
-}
+
 var count = 0;
 
 var IndexIMGControl = {
