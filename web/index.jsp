@@ -16,36 +16,26 @@
 </head>
 <body>
 
-
-<div id="background-color">
-    <div id="background-container">
-        <div id="background-pic">
-            <div id="dark-mask">
-            </div>
+<div id="backgroud-container">
+    <div id="background-pic">
+        <div id="dark-mask">
         </div>
     </div>
 </div>
-
+</div>
 <div id="info-card">
     <div id="head-pic">
+        <img src="IMG/Head-pic.jpg">
     </div>
     <div>
-        <span id="bloger-name"></span>
-        <span id="quoto"></span>
+        <span id="bloger-name">Shaozhupeng</span>
+        <span id="quoto">Code & Life</span>
     </div>
     <div id="info-footer">
-        <span id="qq-logo">
-            <img src="IMG/QQ-Logo.png" width="17%">
-        </span>
-        <span id="github-logo">
-            <img src="IMG/Github-Logo.png" width="17%">
-        </span>
-        <span id="email-logo">
-            <img src="IMG/Email-Logo.png" width="17%">
-        </span>
-        <span id="blog-logo">
-            <img src="IMG/Blog-Logo.png" width="17%">
-        </span>
+        <span id="qq-logo"></span>
+        <span id="github-logo"></span>
+        <span id="email-logo"></span>
+        <span id="blog-logo"></span>
     </div>
 </div>
 </body>

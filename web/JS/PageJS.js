@@ -1,7 +1,14 @@
 $(function () {
     loadIndexIMG();
 });
-
+function loadName() {
+    var name=$("#bloger-name").text();
+    var len = name.toString().length;
+    var size = 8/ len;
+    $("#bloger-name").css({
+        'font-size':''+4.5*size+'em'
+    });
+}
 
 function loadIndexIMG() {
     $.ajax({
