@@ -1,7 +1,9 @@
 package edu.controller;
 
+import edu.dao.Impl.userDaoImpl;
 import edu.pojo.UserEntity;
 import edu.service.userService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,7 +15,10 @@ import java.util.List;
 @org.springframework.stereotype.Controller
 
 public class Controller {
-    private userService userservice;
+//    @Autowired
+//    private userService userservice;
+    @Autowired
+    private userDaoImpl userDao;
     @RequestMapping("/getIndexIMG")
     @ResponseBody
     public ArrayList<String> getIndexIMG(){
@@ -37,7 +42,7 @@ public class Controller {
     @RequestMapping("/getUsers")
     @ResponseBody
     public List<UserEntity> getUsers(){
-        return userservice.getAllUser();
+        return userDao.getAllUsers();
     }
 
 }
