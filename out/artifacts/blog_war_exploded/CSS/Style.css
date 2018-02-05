@@ -129,20 +129,20 @@ body, html {
         box-shadow: 10px 20px 10px black;
         transform: translate3d(0,0,60px);
     }
-        #bloger-name{
-            display: block;
-            position: relative;
-            text-align: center;
-            /*font-family: Cookie;*/
-            font-size: 4.1em;
-        }
+    #bloger-name{
+        display: block;
+        position: relative;
+        text-align: center;
+        /*font-family: Cookie;*/
+        font-size: 4.1em;
+    }
 
-        #quoto{
-            display: block;
-            text-align: center;
-            /*font-family: Lato;*/
-            font-size: 1.2em;
-        }
+    #quoto{
+        display: block;
+        text-align: center;
+        /*font-family: Lato;*/
+        font-size: 1.2em;
+    }
 }
 
 @media screen and (max-width: 1440px)  and (min-width: 769px){

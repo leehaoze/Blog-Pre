@@ -1,8 +1,15 @@
 $(function () {
     IndexIMGControl.run();
-    InfoCard.run()
+    InfoCard.run();
+    loadName();
 });
-
+function loadName() {
+    var name= $('#bloger-name').text();
+    var len = name.toString().length;
+    var size = 8 / len;
+    console.log(name.toString());
+    $('#bloger-name').css({'font-size':''+4.5*size+'em'});
+}
 var IndexIMGControl = {
     count: 0,
     imgPath: undefined,
@@ -50,6 +57,7 @@ var IndexIMGControl = {
 var InfoCard = {
     run : function () {
         InfoCard.loadInfo();
+        console.log("Get INFO Success");
     },
     loadInfo: function () {
         $.ajax({
@@ -57,6 +65,7 @@ var InfoCard = {
             url: '/getInfo.form',
             success: function (data) {
                 InfoCard.writeData(data);
+                console.log("GetInfo SUCCESS");
             }
         })
     },
