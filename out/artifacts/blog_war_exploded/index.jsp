@@ -35,19 +35,19 @@
     </div>
     <div id="info-footer">
         <span id="qq-logo">
-            <img src="IMG/QQ-Logo.png" width="17%">
+            <img src="IMG/QQ-Logo.png">
         </span>
         <span id="wechat-logo">
-            <img src="IMG/WeChat-Logo.png" width="17%">
+            <img src="IMG/WeChat-Logo.png">
         </span>
         <span id="github-logo">
-            <img src="IMG/Github-Logo.png" width="17%">
+            <img src="IMG/Github-Logo.png">
         </span>
         <span id="email-logo">
-            <img src="IMG/Email-Logo.png" width="17%">
+            <img src="IMG/Email-Logo.png">
         </span>
         <span id="blog-logo">
-            <img src="IMG/Blog-Logo.png" width="17%">
+            <img src="IMG/Blog-Logo.png">
         </span>
     </div>
 </div>

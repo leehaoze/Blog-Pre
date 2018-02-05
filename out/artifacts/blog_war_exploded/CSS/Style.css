@@ -70,24 +70,37 @@ body, html {
         display: block;
         position: relative;
         text-align: center;
-        /*font-family: Cookie;*/
         font-size: 4.5em;
     }
 
     #quoto{
         display: block;
         text-align: center;
-        /*font-family: Lato;*/
         font-size: 1.4em;
     }
 
     #info-footer{
-        background-color: dimgray;
+        margin: 18% auto;
         height: 13%;
-        width: 100%;
-        position: absolute;
-        bottom: 0px;
+        width: 90%;
+        position: relative;
+
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
     }
+
+        #info-footer>span{
+            display: none;
+        }
+
+            #info-footer>span>img{
+                display: block;
+                margin: 0 auto;
+                max-width: 25%;
+                height: auto;
+            }
 
 
 @media screen and (max-width: 450px){
@@ -106,14 +119,12 @@ body, html {
         display: block;
         position: relative;
         text-align: center;
-        /*font-family: Cookie;*/
         font-size: 3.5em;
     }
 
     #quoto{
         display: block;
         text-align: center;
-        /*font-family: Lato;*/
         font-size: 1.2em;
     }
 }
@@ -133,14 +144,12 @@ body, html {
         display: block;
         position: relative;
         text-align: center;
-        /*font-family: Cookie;*/
         font-size: 4.1em;
     }
 
     #quoto{
         display: block;
         text-align: center;
-        /*font-family: Lato;*/
         font-size: 1.2em;
     }
 }

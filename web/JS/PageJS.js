@@ -3,6 +3,7 @@ $(function () {
     InfoCard.run();
     loadName();
 });
+
 function loadName() {
     var name= $('#bloger-name').text();
     var len = name.toString().length;
@@ -10,6 +11,7 @@ function loadName() {
     console.log(name.toString());
     $('#bloger-name').css({'font-size':''+4.5*size+'em'});
 }
+
 var IndexIMGControl = {
     count: 0,
     imgPath: undefined,
@@ -79,5 +81,13 @@ var InfoCard = {
         bloger_name.css('font-family', data['name_font']);
         quoto.text(data['quoto']);
         quoto.css('font-family', data['quoto_font']);
+
+        var index = ["qq","wechat","github","email","blog"];
+
+        for(var i = 0; i < index.length; ++i){
+            if(data[index[i]] != "none"){
+               $('#'+index[i]+'-logo').css('display','inline');
+            }
+        }
     }
 };

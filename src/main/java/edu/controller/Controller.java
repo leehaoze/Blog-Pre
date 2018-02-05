@@ -19,6 +19,7 @@ public class Controller {
 //    private userService userservice;
     @Autowired
     private userDaoImpl userDao;
+
     @RequestMapping("/getIndexIMG")
     @ResponseBody
     public ArrayList<String> getIndexIMG(){
@@ -37,8 +38,16 @@ public class Controller {
         info.put("quoto","Code & Life");
         info.put("name_font","Cookie");
         info.put("quoto_font","Lato");
+
+        info.put("qq","98698965");
+        info.put("wechat","11");
+        info.put("github","11");
+        info.put("email","11");
+        info.put("blog","11");
+
         return info;
     }
+
     @RequestMapping("/getUsers")
     @ResponseBody
     public List<UserEntity> getUsers(){
