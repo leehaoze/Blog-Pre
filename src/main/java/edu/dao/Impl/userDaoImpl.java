@@ -33,7 +33,6 @@ public class userDaoImpl implements userDao {
         UserEntity userEntity = (UserEntity)session.get(UserEntity.class, id);
         ArrayList<UserEntity> list = new ArrayList<UserEntity>();
         list.add(userEntity);
-
         return list;
     }
 }
