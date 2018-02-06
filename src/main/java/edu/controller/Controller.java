@@ -40,11 +40,13 @@ public class Controller {
         info.put("name_font","Cookie");
         info.put("quoto_font","Lato");
 
-        info.put("qq","98698965");
-        info.put("wechat","11");
-        info.put("github","11");
-        info.put("email","11");
-        info.put("blog","11");
+        info.put("qq","http://wpa.qq.com/msgrd?v=3&uin=986989635&site=qq&menu=yes");
+        info.put("wechat","none");
+        info.put("github","https://github.com/leehaoze");
+        info.put("email","Mailto:leehaoze@outlook.com");
+        info.put("blog","#");
+
+        info.put("qq_img","/IMG/QQ-Logo");
 
         return info;
     }

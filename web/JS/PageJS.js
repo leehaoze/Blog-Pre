@@ -20,18 +20,18 @@ $(function () {
 });
 
 function loadName() {
-    var name= $('#bloger-name').text();
+    var name = $('#bloger-name').text();
     var len = name.toString().length;
     var size = 8 / len;
     console.log(name.toString());
-    $('#bloger-name').css({'font-size':''+4.5*size+'em'});
+    $('#bloger-name').css({'font-size': '' + 4.5 * size + 'em'});
 }
 
 var IndexIMGControl = {
     count: 0,
     imgPath: undefined,
     imgNum: 0,
-    run : function () {
+    run: function () {
         $.ajax({
             dataType: 'json',
             url: '/getIndexIMG.form',
@@ -64,7 +64,7 @@ var IndexIMGControl = {
                 'transform': 'translate(' + -(x - this.pre_x) / 100 + 'px,' + -(y - this.pre_y) / 100 + 'px)'
             })
         }
-        else{
+        else {
             this.pre_x = innerWidth / 2;
             this.pre_y = innerHeight / 2;
         }
@@ -72,7 +72,7 @@ var IndexIMGControl = {
 };
 
 var InfoCard = {
-    run : function () {
+    run: function () {
         InfoCard.loadInfo();
         console.log("Get INFO Success");
     },
@@ -91,19 +91,26 @@ var InfoCard = {
             'background': 'url(' + data['head_pic_path'] + ') no-repeat center',
             'background-size': 'cover'
         });
-        var bloger_name = $('#bloger-name'),quoto = $('#quoto');
+        var bloger_name = $('#bloger-name'), quoto = $('#quoto');
         bloger_name.text(data['bloger_name']);
         bloger_name.css('font-family', data['name_font']);
         quoto.text(data['quoto']);
         quoto.css('font-family', data['quoto_font']);
 
-        var index = ["qq","wechat","github","email","blog"];
-
-        for(var i = 0; i < index.length; ++i){
-            if(data[index[i]] != "none"){
-               $('#'+index[i]+'-logo').css('display','inline');
+        var index = ["qq", "wechat", "github", "email", "blog"];
+        var dict = {"qq":"QQ","wechat":"WeChat","github":"Github","email":"Email","blog":"Blog"};
+        var effective_count = 0;
+        for (var i = 0; i < index.length; ++i) {
+            if (data[index[i]] != "none") {
+                $('#info-footer').append(
+                    '<span id="'+index[i]+'-logo"><a href="'+data[index[i]]+'"><img src="IMG/'+dict[index[i]]+'-Logo.png"></a></span>'
+                );
+                effective_count += 1;
             }
         }
+
+        $('#info-footer').find('span>a>img').css('max-width', (effective_count * 20) > 80 ? (effective_count * 20) : 80 + '%');
+
     }
 };
 
