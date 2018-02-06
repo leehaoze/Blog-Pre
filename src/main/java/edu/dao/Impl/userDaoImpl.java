@@ -3,6 +3,8 @@ package edu.dao.Impl;
 import edu.dao.HibernateUtil;
 import edu.dao.userDao;
 import edu.pojo.UserEntity;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -17,10 +19,21 @@ import org.springframework.stereotype.Repository;
 public class userDaoImpl implements userDao {
 
     private SessionFactory sessionFactory;
+    private Session session;
 
     public List<UserEntity> getAllUsers() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
         List list = session.createQuery("from UserEntity").list();
+        session.close();
+
+        return list;
+    }
+    public ArrayList<UserEntity> getUserById(Integer id){
+        session = HibernateUtil.getSessionFactory().openSession();
+        UserEntity userEntity = (UserEntity)session.get(UserEntity.class, id);
+        ArrayList<UserEntity> list = new ArrayList<UserEntity>();
+        list.add(userEntity);
+
         return list;
     }
 }

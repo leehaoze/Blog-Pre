@@ -1,12 +1,13 @@
 package edu.controller;
 
 import edu.dao.Impl.userDaoImpl;
+import edu.dao.userDao;
 import edu.pojo.UserEntity;
+import edu.service.Impl.userServiceImpl;
 import edu.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpRequest;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class Controller {
 //    @Autowired
 //    private userService userservice;
     @Autowired
-    private userDaoImpl userDao;
+    private userServiceImpl userService;
 
     @RequestMapping("/getIndexIMG")
     @ResponseBody
@@ -33,7 +34,7 @@ public class Controller {
     @ResponseBody
     public HashMap<String,String> getInfo(){
         HashMap<String,String> info = new HashMap<String, String>();
-        info.put("head_pic_path","IMG/Head-Pic.jpg");
+        info.put("head_pic_path","IMG/Head-pic.jpg");
         info.put("bloger_name","Leehaoze");
         info.put("quoto","Code & Life");
         info.put("name_font","Cookie");
@@ -51,7 +52,19 @@ public class Controller {
     @RequestMapping("/getUsers")
     @ResponseBody
     public List<UserEntity> getUsers(){
-        return userDao.getAllUsers();
+        return userService.getAllUser();
+    }
+    @RequestMapping(value = "/getUserById", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public ArrayList<UserEntity> getUserById(@RequestParam Integer id){
+        System.out.println("Get one: "+ id);
+        //int iid = Integer.parseInt(id);
+        return userService.getUserById(id);
+    }
+    @RequestMapping("/getId")
+    @ResponseBody
+    public ArrayList<UserEntity> getId(){
+        return userService.getUserById(1);
     }
 
 }

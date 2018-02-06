@@ -2,6 +2,21 @@ $(function () {
     IndexIMGControl.run();
     InfoCard.run();
     loadName();
+    AJAX.Get("GET", "json", "/getUserById.form", {"id": 1}, null);
+    /*$.ajax({
+        url: '/getUserById.form',
+        data: {"id": 1},
+        dataType: "json",
+        type: "GET",
+
+        success: function (data) {
+            console.log(data);
+
+        },
+        error: function (data) {
+            console.log("AJAX FAILED");
+        }
+    })*/
 });
 
 function loadName() {
@@ -90,4 +105,38 @@ var InfoCard = {
             }
         }
     }
+};
+
+var AJAX = {
+    Url: "",
+    Type: "",
+    DataType: null,
+    postdata: null,
+    getdata: null,
+    Get: function(Type, dataType, url, postdata, getdata){
+        this.ajaxSet(Type, dataType, url, postdata, getdata);
+        $.ajax({
+            url: this.Url,
+            type: this.Type,
+            contentType: "application/json; charset=utf-8",
+            data: this.postdata,
+            dataType: this.DataType,
+            success: function(data){
+                this.getdata = data;
+                console.log("Get Success USER");
+                console.log(data);
+            },
+            error: function (data, textStatus, errorThrown) {
+                console.log(data);
+            }
+        })
+    },
+    ajaxSet: function (Type, dataType, url, postdata, getdata) {
+        this.Type = Type;
+        this.DataType = dataType;
+        this.Url = url;
+        this.postdata = postdata;
+        this.getdata = getdata;
+    }
+
 };

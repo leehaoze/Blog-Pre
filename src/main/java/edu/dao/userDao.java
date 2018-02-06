@@ -7,4 +7,5 @@ import java.util.List;
 public interface userDao {
     //前n条数据
    public List<UserEntity> getAllUsers();
+   public  ArrayList<UserEntity> getUserById(Integer id);
 }
