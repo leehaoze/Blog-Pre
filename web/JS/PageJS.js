@@ -1,8 +1,11 @@
 $(function () {
     IndexIMGControl.run();
     InfoCard.run();
-    loadName();
+
+
+
     AJAX.Get("GET", "json", "/getUserById.form", {"id": 1}, null);
+
     /*$.ajax({
         url: '/getUserById.form',
         data: {"id": 1},
@@ -19,12 +22,16 @@ $(function () {
     })*/
 });
 
-function loadName() {
-    var name = $('#bloger-name').text();
-    var len = name.toString().length;
+
+function loadName(blogername) {
+    var name = blogername.text();
+    var len =  name.length;
     var size = 8 / len;
+    var infocard = $('#info-card');
+    var width = infocard.width();
     console.log(name.toString());
-    $('#bloger-name').css({'font-size': '' + 4.5 * size + 'em'});
+    console.log(width);
+    blogername.css({'font-size': '' + 4.5 * size * (width / 230) + 'em'});
 }
 
 var IndexIMGControl = {
@@ -74,7 +81,6 @@ var IndexIMGControl = {
 var InfoCard = {
     run: function () {
         InfoCard.loadInfo();
-        console.log("Get INFO Success");
     },
     loadInfo: function () {
         $.ajax({
@@ -96,7 +102,7 @@ var InfoCard = {
         bloger_name.css('font-family', data['name_font']);
         quoto.text(data['quoto']);
         quoto.css('font-family', data['quoto_font']);
-
+        loadName(bloger_name);
         var index = ["qq", "wechat", "github", "email", "blog"];
         var dict = {"qq":"QQ","wechat":"WeChat","github":"Github","email":"Email","blog":"Blog"};
         var effective_count = 0;
@@ -147,3 +153,4 @@ var AJAX = {
     }
 
 };
+$(window).onload

@@ -35,7 +35,7 @@ public class Controller {
     public HashMap<String,String> getInfo(){
         HashMap<String,String> info = new HashMap<String, String>();
         info.put("head_pic_path","IMG/Head-pic.jpg");
-        info.put("bloger_name","Leehaoze");
+        info.put("bloger_name","Shaozhupeng");
         info.put("quoto","Code & Life");
         info.put("name_font","Cookie");
         info.put("quoto_font","Lato");
