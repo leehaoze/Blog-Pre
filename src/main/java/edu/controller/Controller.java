@@ -56,6 +56,7 @@ public class Controller {
     public List<UserEntity> getUsers(){
         return userService.getAllUser();
     }
+
     @RequestMapping(value = "/getUserById", produces = "application/json; charset=utf-8")
     @ResponseBody
     public ArrayList<UserEntity> getUserById(@RequestParam Integer id){
@@ -63,10 +64,12 @@ public class Controller {
         //int iid = Integer.parseInt(id);
         return userService.getUserById(id);
     }
+
     @RequestMapping("/getId")
     @ResponseBody
     public ArrayList<UserEntity> getId(){
         return userService.getUserById(1);
     }
+
 
 }
