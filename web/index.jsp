@@ -15,9 +15,6 @@
     <title>My Blog</title>
 </head>
 <body>
-<script>
-    window.onresize = loadName($('#bloger-name'));
-</script>
 
 <div id="background-color">
     <div id="background-container">
