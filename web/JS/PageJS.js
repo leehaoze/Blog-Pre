@@ -2,8 +2,6 @@ $(function () {
     IndexIMGControl.run();
     InfoCard.run();
 
-
-
     AJAX.Get("GET", "json", "/getUserById.form", {"id": 1}, null);
 
     /*$.ajax({
@@ -102,7 +100,7 @@ var InfoCard = {
         bloger_name.css('font-family', data['name_font']);
         quoto.text(data['quoto']);
         quoto.css('font-family', data['quoto_font']);
-        loadName(bloger_name);
+        $(window).resize(loadName(bloger_name));
         var index = ["qq", "wechat", "github", "email", "blog"];
         var dict = {"qq":"QQ","wechat":"WeChat","github":"Github","email":"Email","blog":"Blog"};
         var effective_count = 0;
@@ -153,4 +151,3 @@ var AJAX = {
     }
 
 };
-$(window).onload
