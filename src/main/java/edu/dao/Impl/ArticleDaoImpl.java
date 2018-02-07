@@ -33,7 +33,7 @@ public class ArticleDaoImpl implements ArticleDao{
     }
 
     @Override
-    public ArticleEntity getArticleById(Integer id) {
-        return (ArticleEntity) commonQuery("select * from ArticleEntity where id = " + id.toString()).get(0);
+    public List getArticleById(Integer id) {
+        return  commonQuery("from ArticleEntity where id = " + id.toString());
     }
 }
