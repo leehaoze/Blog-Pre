@@ -14,21 +14,26 @@ import java.util.List;
 public class ArticleDaoImpl implements ArticleDao{
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-    public List commonQuery(String query){
+    private List commonQuery(String query){
         Session session = sessionFactory.openSession();
-        List list = (ArrayList) session.createQuery(query).list();
+        List list = session.createQuery(query).list();
         session.close();
         return list;
     }
 
     @Override
     public ArrayList<ArticleEntity> getAllArticles() {
-        return (ArrayList<ArticleEntity>) commonQuery("From ArticleEntity");
+        return (ArrayList<ArticleEntity>) commonQuery("from ArticleEntity");
     }
 
 
     @Override
     public ArrayList<String> getAllArticlesTitle() {
-        return null;
+        return (ArrayList<String>) commonQuery("select title from ArticleEntity");
+    }
+
+    @Override
+    public ArticleEntity getArticleById(Integer id) {
+        return (ArticleEntity) commonQuery("select * from ArticleEntity where id = " + id.toString()).get(0);
     }
 }
