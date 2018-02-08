@@ -1,12 +1,15 @@
 package edu.controller;
 
+import edu.dao.Impl.ArticleDaoImpl;
 import edu.dao.Impl.userDaoImpl;
 import edu.dao.userDao;
 import edu.pojo.UserEntity;
+import edu.service.Impl.articleServiceImpl;
 import edu.service.Impl.userServiceImpl;
 import edu.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -16,10 +19,11 @@ import java.util.List;
 @org.springframework.stereotype.Controller
 
 public class Controller {
-//    @Autowired
-//    private userService userservice;
     @Autowired
     private userServiceImpl userService;
+
+    @Autowired
+    private articleServiceImpl articleService;
 
     @RequestMapping("/getIndexIMG")
     @ResponseBody
@@ -49,6 +53,12 @@ public class Controller {
         info.put("qq_img","/IMG/QQ-Logo");
 
         return info;
+    }
+
+    @RequestMapping("/getArticleTitles")
+    @ResponseBody
+    public List getArticlesTitleAndId(){
+        return articleService.getTitlesAndId();
     }
 
     @RequestMapping("/getUsers")

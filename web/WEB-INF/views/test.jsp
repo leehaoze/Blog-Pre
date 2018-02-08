@@ -34,6 +34,8 @@
             url: '/getClassMethod/' + $('#className option:selected').text() + '.form',
             success: function (data) {
                 $('#method').remove();
+                $('#para').remove();
+                $('#sub').remove();
                 $('#lee').find('tbody').append(
                     '<tr id="method">' +
                     '<td>方法</td>' +
