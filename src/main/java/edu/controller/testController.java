@@ -18,13 +18,25 @@ import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+/**
+ * @author leehaoze
+ */
 @Controller
 public class testController {
+
+    /**
+     * 返回测试页面
+     * @return 测试页面文件
+     */
     @RequestMapping("/test")
     public String test(){
         return "test";
     }
 
+    /**
+     * 查询所有的类名
+     * @return 包含所有类名称的List
+     */
     @RequestMapping("/getAllClassesName")
     @ResponseBody
     public List getAllClassesName(){
@@ -34,6 +46,12 @@ public class testController {
         return result;
     }
 
+    /**
+     * 查询类下所有的方法名
+     * @param className 要查询的类的名称
+     * @return 除对象自带的方法以外的所有方法名
+     * @throws ClassNotFoundException 不存在查询的类时返回该异常
+     */
     @RequestMapping("/getClassMethod/{className}")
     @ResponseBody
     public List getClassMethod(@PathVariable("className") String className) throws ClassNotFoundException {
