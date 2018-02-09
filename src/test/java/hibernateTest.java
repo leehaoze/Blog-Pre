@@ -1,4 +1,4 @@
-import edu.dao.HibernateUtil;
+import util.HibernateUtil;
 import edu.pojo.ArticleEntity;
 import edu.pojo.TagEntity;
 import org.hibernate.Session;

@@ -1,6 +1,6 @@
 package edu.dao.Impl;
 
-import edu.dao.HibernateUtil;
+import util.HibernateUtil;
 import edu.dao.userDao;
 import edu.pojo.UserEntity;
 
@@ -11,8 +11,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 
-import org.hibernate.Query;
-import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -35,4 +33,5 @@ public class userDaoImpl implements userDao {
         list.add(userEntity);
         return list;
     }
+
 }

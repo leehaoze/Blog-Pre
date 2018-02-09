@@ -20,4 +20,5 @@ public class userServiceImpl implements userService {
     public ArrayList<UserEntity> getUserById(Integer id){
         return userDao.getUserById(id);
     }
+
 }

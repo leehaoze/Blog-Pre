@@ -1,7 +1,7 @@
 package edu.dao.Impl;
 
 import edu.dao.ArticleDao;
-import edu.dao.HibernateUtil;
+import util.HibernateUtil;
 import edu.pojo.ArticleEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
