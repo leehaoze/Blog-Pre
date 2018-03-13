@@ -26,6 +26,8 @@
         <mapping class="edu.pojo.TypeEntity"/>
         <mapping resource="edu/pojo/UserEntity.hbm.xml"/>
         <mapping class="edu.pojo.UserEntity"/>
+        <mapping resource="edu/pojo/SiteConfEntity.hbm.xml"/>
+        <mapping class="edu.pojo.SiteConfEntity"/>
         <!--<property name="connection.username">admin</property>-->
         <!--<property name="connection.password">admin</property>-->
     </session-factory>

@@ -4,6 +4,7 @@ import edu.dao.Impl.ArticleDaoImpl;
 import edu.dao.Impl.userDaoImpl;
 import edu.dao.userDao;
 import edu.pojo.UserEntity;
+import edu.service.Impl.activityServiceImpl;
 import edu.service.Impl.articleServiceImpl;
 import edu.service.Impl.userServiceImpl;
 import edu.service.userService;
@@ -25,34 +26,24 @@ public class Controller {
     @Autowired
     private articleServiceImpl articleService;
 
+    @Autowired
+    private activityServiceImpl activityService;
+
     @RequestMapping("/getIndexIMG")
     @ResponseBody
     public ArrayList<String> getIndexIMG(){
-        ArrayList<String> img = new ArrayList<String>();
-        img.add("IMG/ShangHai01.jpg");
-        img.add("IMG/ShangHai02.jpg");
-        return img;
+        return activityService.getIndexIMG();
     }
 
     @RequestMapping("/getInfo")
     @ResponseBody
     public HashMap<String,String> getInfo(){
-        HashMap<String,String> info = new HashMap<String, String>();
-        info.put("head_pic_path","IMG/Head-pic.jpg");
-        info.put("bloger_name","Shaozhupeng");
-        info.put("quoto","Code & Life");
-        info.put("name_font","Cookie");
-        info.put("quoto_font","Lato");
+        return activityService.getInfo();
+    }
 
-        info.put("qq","http://wpa.qq.com/msgrd?v=3&uin=986989635&site=qq&menu=yes");
-        info.put("wechat","none");
-        info.put("github","https://github.com/leehaoze");
-        info.put("email","Mailto:leehaoze@outlook.com");
-        info.put("blog","#");
-
-        info.put("qq_img","/IMG/QQ-Logo");
-
-        return info;
+    @RequestMapping("/getDisplayArea")
+    public String getDIsplayArea(){
+        return "display-area";
     }
 
     @RequestMapping("/getArticleTitles")
@@ -60,6 +51,8 @@ public class Controller {
     public List getArticlesTitleAndId(){
         return articleService.getTitlesAndId();
     }
+
+
 
     @RequestMapping("/getUsers")
     @ResponseBody

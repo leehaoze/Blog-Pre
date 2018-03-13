@@ -19,12 +19,13 @@ public class ActivityController {
     }
     @RequestMapping("/userLogin")
     public String Login(@RequestParam String username, @RequestParam String password){
-        System.out.println("username:" + username);
-        System.out.println("password:"  + password);
-        if (activityService.Login(username, password) == true){
-            return "index";
-        }
-        else
-            return "fail";
+//        System.out.println("username:" + username);
+//        System.out.println("password:"  + password);
+//        if (activityService.Login(username, password) == true){
+//            return "index";
+//        }
+//        else
+//            return "fail";
+        return "none";
     }
 }

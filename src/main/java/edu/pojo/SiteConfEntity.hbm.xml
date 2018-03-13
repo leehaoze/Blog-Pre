@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="edu.pojo.SiteConfEntity" table="site_conf" schema="blog">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="indexPic">
+            <column name="index_pic" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="headPic">
+            <column name="head_pic" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="blogerName">
+            <column name="bloger_name" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="quoto">
+            <column name="quoto" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameFont">
+            <column name="name_font" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="quotoFont">
+            <column name="quoto_font" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="qq">
+            <column name="qq" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="wechat">
+            <column name="wechat" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="github">
+            <column name="github" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="email">
+            <column name="email" sql-type="varchar(255)" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

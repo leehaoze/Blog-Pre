@@ -4,9 +4,12 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
+          <unit-entry name="a.xml" value="08c4c48a-f6d6-45bc-91f2-01ef62426885" />
           <unit-entry name="hibernate.cfg.xml" value="08c4c48a-f6d6-45bc-91f2-01ef62426885" />
         </datasource-map>
-        <naming-strategy-map />
+        <naming-strategy-map>
+          <unit-entry name="hibernate.cfg.xml" />
+        </naming-strategy-map>
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
       </configuration>
     </facet>
@@ -18,9 +21,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/web" relative="/" />
         </webroots>
-        <sourceRoots>
-          <root url="file://$MODULE_DIR$/src" />
-        </sourceRoots>
+        <sourceRoots />
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
@@ -39,9 +40,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Hibernate 5.2.12-5.2.12" level="project" />
-    <orderEntry type="library" name="Spring-4.3.13.RELEASE" level="project" />
-    <orderEntry type="library" name="Spring MVC-4.3.13.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Hibernate 5.2.12-5.2.12" level="project" />
+    <orderEntry type="library" exported="" name="Spring-4.3.13.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Spring MVC-4.3.13.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.3" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.3" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.0" level="project" />

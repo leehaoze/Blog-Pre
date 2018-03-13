@@ -35,5 +35,12 @@
     <div id="info-footer">
     </div>
 </div>
+
+
+<div id="display-area">
+
+</div>
+
+
 </body>
 </html>
