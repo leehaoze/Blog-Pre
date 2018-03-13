@@ -58,7 +58,7 @@ var IndexIMGControl = {
             'animation': 'img-scale 10s linear infinite forwards ',
             'background-size': 'cover'
         });
-        $('#info-card:after').css({
+        $('#info-card-background').css({
             'background': 'url(' + this.imgPath[this.count] + ') no-repeat fixed center',
             'animation': 'img-scale 10s linear infinite forwards ',
             'background-size': 'cover'
@@ -75,7 +75,7 @@ var IndexIMGControl = {
             $('#background-container').css({
                 'transform': 'translate(' + -(x - this.pre_x) / 100 + 'px,' + -(y - this.pre_y) / 100 + 'px)'
             });
-            $('#info-card:after').css({
+            $('#info-card-background-move').css({
                 'transform': 'translate(' + -(x - this.pre_x) / 100 + 'px,' + -(y - this.pre_y) / 100 + 'px)'
             });
         }
@@ -89,6 +89,7 @@ var IndexIMGControl = {
 var InfoCard = {
     run: function () {
         InfoCard.loadInfo();
+        InfoCard.blur_control()
     },
     loadInfo: function () {
         $.ajax({
@@ -109,9 +110,10 @@ var InfoCard = {
         bloger_name.css('font-family', data['name_font']);
         quoto.text(data['quoto']);
         quoto.css('font-family', data['quoto_font']);
-        // 名字自适应大小
+        // 名字自适应大小,磨砂背景自适应
         $(window).resize(function () {
             InfoCard.name_size_control(bloger_name)
+            InfoCard.blur_control();
         });
         var index = ["qq", "wechat", "github", "email", "blog"];
         var dict = {"qq": "QQ", "wechat": "WeChat", "github": "Github", "email": "Email", "blog": "Blog"};
@@ -146,6 +148,21 @@ var InfoCard = {
         var infocard = $('#info-card');
         var width = infocard.width();
         blogername.css({'font-size': '' + 4.5 * size * (width / 230) + 'em'});
+    }
+    ,
+    blur_control:function () {
+        var info_card = $('#info-card');
+        var width = info_card.width();
+        var height = info_card.height();
+        var top = info_card.position()['top'];
+        var margin_left =  (info_card.outerWidth(true) - width) / 2;
+        $('#info-card-background-container').css({
+            'width':width,
+            'height':height,
+            'top':top,
+            'margin-left':margin_left
+        })
+
     }
 };
 

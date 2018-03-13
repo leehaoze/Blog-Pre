@@ -25,6 +25,8 @@
     </div>
 </div>
 
+
+<div id="info-card-background-container"><div id="info-card-background-move"><div id="info-card-background"></div></div></div>
 <div id="info-card">
     <div id="head-pic">
     </div>
