@@ -12,6 +12,7 @@
     <link href="CSS/Style.css" type="text/css" rel="stylesheet"/>
     <script type="text/javascript" src="JS/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="JS/PageJS.js"></script>
+    <link href="CSS/DisplayStyle.css" type="text/css" rel="stylesheet"/>
     <title>My Blog</title>
 </head>
 <body>

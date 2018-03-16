@@ -2,7 +2,7 @@ package edu.dao;
 
 import java.util.ArrayList;
 
-public interface activityDao {
+public interface ActivityDao {
 //    public boolean  Login(String name, String pwd);
 
     public ArrayList<String> getIndexIMG();

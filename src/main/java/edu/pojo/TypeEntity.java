@@ -9,6 +9,15 @@ public class TypeEntity {
     private Integer id;
     private String name;
     private Integer num;
+    private String picPath;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
 
     @Id
     @Column(name = "id", nullable = false)
@@ -21,7 +30,7 @@ public class TypeEntity {
     }
 
     @Basic
-    @Column(name = "name", nullable = true, length = 40)
+    @Column(name = "name", nullable = true, length = 30)
     public String getName() {
         return name;
     }
@@ -54,5 +63,15 @@ public class TypeEntity {
     public int hashCode() {
 
         return Objects.hash(id, name, num);
+    }
+
+    @Basic
+    @Column(name = "picPath", nullable = true, length = 255)
+    public String getPicPath() {
+        return picPath;
+    }
+
+    public void setPicPath(String picPath) {
+        this.picPath = picPath;
     }
 }

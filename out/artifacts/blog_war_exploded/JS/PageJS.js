@@ -58,7 +58,7 @@ var IndexIMGControl = {
             'animation': 'img-scale 10s linear infinite forwards ',
             'background-size': 'cover'
         });
-        $('#info-card:after').css({
+        $('#info-card-background').css({
             'background': 'url(' + this.imgPath[this.count] + ') no-repeat fixed center',
             'animation': 'img-scale 10s linear infinite forwards ',
             'background-size': 'cover'
@@ -75,7 +75,7 @@ var IndexIMGControl = {
             $('#background-container').css({
                 'transform': 'translate(' + -(x - this.pre_x) / 100 + 'px,' + -(y - this.pre_y) / 100 + 'px)'
             });
-            $('#info-card:after').css({
+            $('#info-card-background-move').css({
                 'transform': 'translate(' + -(x - this.pre_x) / 100 + 'px,' + -(y - this.pre_y) / 100 + 'px)'
             });
         }
@@ -89,6 +89,7 @@ var IndexIMGControl = {
 var InfoCard = {
     run: function () {
         InfoCard.loadInfo();
+        InfoCard.blur_control()
     },
     loadInfo: function () {
         $.ajax({
@@ -109,9 +110,10 @@ var InfoCard = {
         bloger_name.css('font-family', data['name_font']);
         quoto.text(data['quoto']);
         quoto.css('font-family', data['quoto_font']);
-        // 名字自适应大小
+        // 名字自适应大小,磨砂背景自适应
         $(window).resize(function () {
-            InfoCard.name_size_control(bloger_name)
+            InfoCard.name_size_control(bloger_name);
+            InfoCard.blur_control();
         });
         var index = ["qq", "wechat", "github", "email", "blog"];
         var dict = {"qq": "QQ", "wechat": "WeChat", "github": "Github", "email": "Email", "blog": "Blog"};
@@ -147,12 +149,27 @@ var InfoCard = {
         var width = infocard.width();
         blogername.css({'font-size': '' + 4.5 * size * (width / 230) + 'em'});
     }
+    ,
+    blur_control:function () {
+        var info_card = $('#info-card');
+        var width = info_card.width();
+        var height = info_card.height();
+        var top = info_card.position()['top'];
+        var margin_left =  (info_card.outerWidth(true) - width) / 2;
+        $('#info-card-background-container').css({
+            'width':width,
+            'height':height,
+            'top':top,
+            'margin-left':margin_left
+        })
+
+    }
 };
 
 
 var page_switch_control = {
     load_blog_page: function (replay) {
-        $('#display-area').load("/getDisplayArea.form", function () {
+        $('#display-area').load(window.document.location.href+"getDisplayArea.form", function () {
             var background_height = $('#background-color').height();
             $('#main-content').css({
                 'top': '-' + (background_height + $('#info-card').height() - window.innerHeight * 0.02),
@@ -166,12 +183,97 @@ var page_switch_control = {
                     title: window.document.title,
                     html: 'page_switch_control.load_blog_page'
                 };
-                window.history.pushState(state, null, "http://localhost:8080/blog");
+                window.history.pushState(state, null, window.document.location.href+"/blog");
+
+                blog_page_control.page_resize();
+                blog_page_control.load_head_pic();
+                blog_page_control.load_type_menu();
             }
         });
     }
 };
 
+
+var blog_page_control = {
+    page_resize : function () {
+        $(window).resize(function () {
+            var background_height = $('#background-color').height();
+            $('#main-content').css({
+                'top': '-' + (background_height + $('#info-card').height() - window.innerHeight * 0.02),
+                'transition': 'top 1600ms cubic-bezier(0.175, 0.885, 0.255, 1.12) 10ms'
+            });
+        })
+    },
+    load_head_pic : function () {
+        $.ajax({
+            dataType:'text',
+            url:'/getHeadPic.form',
+            success:function (data) {
+                $('#head-pic-small').css({
+                    'background':'url('+data+')  no-repeat center',
+                    'background-size': 'cover'
+                })
+            }
+        })
+    },
+    load_type_menu :function () {
+        $.ajax({
+            dataType : 'json',
+            url:'/getAllTypes.form',
+            success:function (data) {
+                $.each(data,function (index,value) {
+                    $('#menu-content').append(
+                        '<span class="type">' +
+                            '<img src="'+value['picPath']+'">' +
+                            '<span>'+value['name']+'</span>' +
+                            '<span class="type-id" style="display: none">'+value['id']+'</span>' +
+                        '</span>'
+                    )
+                });
+                blog_page_control.register_type_menu_click();
+            }
+        })
+    },
+    register_type_menu_click:function () {
+        $('.type').each(function () {
+            $(this).click(function () {
+                var type_id = $(this).find('.type-id').text();
+                $.ajax({
+                    dataType:'json',
+                    url:'/getArticleList/'+type_id+'.form',
+                    success:function (data) {
+                        $('#article-list').empty();
+                        $.each(data,function (index,value) {
+                            $('#article-list').append(
+                                '<span class="article-title">' +
+                                '<span class="article-name">'+ value['title'] +'</span>' +
+                                '<span class="article-id" style="display: none">'+value['id']+'</span>' +
+                                '</span>'
+                            )
+                        });
+                        blog_page_control.register_article_menu_click();
+                    }
+                })
+
+            })
+        })
+    },
+    register_article_menu_click:function () {
+        $('.article-title').each(function () {
+            $(this).click(function () {
+                var article_id = $(this).find('.article-id').text();
+                $.ajax({
+                    dataType:'json',
+                    url:'/getArticle/'+article_id+'.form',
+                    success:function (data) {
+                        console.log(data)
+                        $('#line-three').append(data['content']);
+                    }
+                })
+            })
+        })
+    }
+};
 
 var AJAX = {
     Url: "",

@@ -2,12 +2,14 @@ package edu.service.Impl;
 
 import edu.dao.ArticleDao;
 import edu.dao.Impl.ArticleDaoImpl;
+import edu.pojo.ArticleEntity;
 import edu.service.articleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,7 +18,15 @@ public class articleServiceImpl implements articleService {
     ArticleDaoImpl articleDao = new ArticleDaoImpl();
 
 
+    @Override
+    public ArrayList<ArticleEntity> getArticleListById(int id) {
+        return articleDao.getArticleListByID(id);
+    }
 
+    @Override
+    public ArticleEntity getArticleById(int id) {
+        return articleDao.getArticleById(id);
+    }
 
     /**
      * {@inheritDoc}

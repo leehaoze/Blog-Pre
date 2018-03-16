@@ -13,6 +13,8 @@ public interface activityService {
 
     public HashMap<String,String> getInfo();
 
+    public String getHeadPic();
+
 
 
 }

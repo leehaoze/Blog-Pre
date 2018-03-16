@@ -2,18 +2,17 @@ package edu.dao.Impl;
 
 import org.hibernate.SessionFactory;
 import util.HibernateUtil;
-import edu.dao.activityDao;
+import edu.dao.ActivityDao;
 
 import org.springframework.stereotype.Repository;
 import org.hibernate.Session;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public class activityDaoImpl implements activityDao {
+public class ActivityDaoImpl implements ActivityDao {
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     private List commonQuery(String query) {

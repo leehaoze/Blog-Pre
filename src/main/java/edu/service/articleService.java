@@ -1,8 +1,15 @@
 package edu.service;
 
+import edu.pojo.ArticleEntity;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public interface articleService {
+
+    public ArrayList<ArticleEntity> getArticleListById(int id);
+
+    public ArticleEntity getArticleById(int id);
 
     /**
      * 获取所有文章的题目

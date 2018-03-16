@@ -65,6 +65,11 @@ body, html {
         filter: blur(7px);
     }
 
+        #info-card-background-move{
+            width: 110%;
+            height: 110%;
+        }
+
     /*头像*/
     #head-pic{
         border-radius: 50% 50% 50% 50%;
@@ -74,6 +79,8 @@ body, html {
         height: 38%;
         width: 60%;
         overflow: hidden;
+        transform:perspective(300px) translate3d(0,0,0px);
+        transition:transform 0.25s;
     }
 
     /*头像鼠标划入放大*/
@@ -140,6 +147,7 @@ body, html {
         /*background: rgba(255, 255, 255, 0.34);*/
         box-shadow: 10px 20px 10px black;
         transform: translate3d(0,0,60px);
+        border-radius: 15px;
     }
     /*info卡片的磨砂背景*/
     #info-card-background-container{
@@ -148,7 +156,10 @@ body, html {
         position: absolute;
         transform: translate3d(0,0,60px);
         overflow: hidden;
+        border-radius: 15px;
     }
+
+
 
     /*博客名*/
     #bloger-name{
@@ -175,6 +186,7 @@ body, html {
         /*background: rgba(255, 255, 255, 0.34);*/
         box-shadow: 10px 20px 10px black;
         transform: translate3d(0,0,60px);
+        border-radius: 15px;
     }
 
     #info-card-background-container{
@@ -183,6 +195,7 @@ body, html {
         height: 305px;
         transform: translate3d(0,0,60px);
         overflow: hidden;
+        border-radius: 15px;
     }
 
     #bloger-name{
@@ -209,9 +222,11 @@ body, html {
         /*background: rgba(255, 255, 255, 0.34);*/
         box-shadow: 10px 20px 10px black;
         transform: translate3d(0,0,60px);
+        border-radius: 15px;
     }
 
     #info-card-background-container{
+        border-radius: 15px;
         position: absolute;
         width: 230px;
         height: 333px;
@@ -249,9 +264,11 @@ body, html {
         /*background: rgba(255, 255, 255, 0.34);*/
         box-shadow: 10px 20px 10px black;
         transform: translate3d(0,0,60px);
+        border-radius: 15px;
     }
 
     #info-card-background-container{
+        border-radius: 15px;
         position: absolute;
         width: 314px;
         height: 453px;
@@ -275,13 +292,15 @@ body, html {
 #main-content{
     top: 0;
     width: 99%;
-    background: darkgreen;
+    background: white;
     height: 98%;
     position: relative;
     margin-left: 0.5%;
     border-radius: 1% 1% 0 0;
     transition: top;
 }
+
+
 
 
 

@@ -2,11 +2,15 @@ package edu.controller;
 
 import edu.dao.Impl.ArticleDaoImpl;
 import edu.dao.Impl.userDaoImpl;
+import edu.dao.TypeDao;
 import edu.dao.userDao;
+import edu.pojo.ArticleEntity;
+import edu.pojo.TypeEntity;
 import edu.pojo.UserEntity;
 import edu.service.Impl.activityServiceImpl;
 import edu.service.Impl.articleServiceImpl;
 import edu.service.Impl.userServiceImpl;
+import edu.service.TypeService;
 import edu.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -28,6 +32,9 @@ public class Controller {
 
     @Autowired
     private activityServiceImpl activityService;
+
+    @Autowired
+    private TypeService typeService;
 
     @RequestMapping("/getIndexIMG")
     @ResponseBody
@@ -74,5 +81,29 @@ public class Controller {
         return userService.getUserById(1);
     }
 
+
+    @RequestMapping("/getAllTypes")
+    @ResponseBody
+    public ArrayList<TypeEntity> getAllTypes(){
+        return typeService.getAllTypes();
+    }
+
+    @RequestMapping("/getHeadPic")
+    @ResponseBody
+    public String getHeadPic(){
+        return activityService.getHeadPic();
+    }
+
+    @RequestMapping("/getArticleList/{typeID}")
+    @ResponseBody
+    public ArrayList<ArticleEntity> getArticleList(@PathVariable("typeID") String typeID){
+        return articleService.getArticleListById(Integer.parseInt(typeID));
+    }
+
+    @RequestMapping("/getArticle/{articleID}")
+    @ResponseBody
+    public ArticleEntity getArticleById(@PathVariable("articleID")int articleID){
+        return articleService.getArticleById(articleID);
+    }
 
 }

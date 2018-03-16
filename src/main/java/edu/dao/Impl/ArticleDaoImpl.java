@@ -42,6 +42,15 @@ public class ArticleDaoImpl implements ArticleDao{
         return list;
     }
 
+    /**
+     *
+     * @param id 分类的ID
+     * @return
+     */
+    @Override
+    public ArrayList<ArticleEntity> getArticleListByID(int id) {
+        return (ArrayList<ArticleEntity>) commonQuery("from ArticleEntity where type_id = " + id);
+    }
 
     /**
      * {@inheritDoc}
@@ -69,8 +78,8 @@ public class ArticleDaoImpl implements ArticleDao{
      * (FIXME 这一了方便前台测试 返回值是List 可以直接返回实体类; 也可以这里不做修改,有Service处理)
      */
     @Override
-    public List getArticleById(Integer id) {
-        return  commonQuery("from ArticleEntity where id = " + id.toString());
+    public ArticleEntity getArticleById(Integer id) {
+        return  (ArticleEntity) commonQuery("from ArticleEntity where id = " + id.toString()).get(0);
     }
 
     /**

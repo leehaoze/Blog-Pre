@@ -7,6 +7,14 @@ import java.util.List;
 
 public interface ArticleDao {
     /**
+     *
+     * @param id 分类的ID
+     * @return
+     */
+    public ArrayList<ArticleEntity> getArticleListByID(int id);
+
+
+    /**
      * 查询所有的文章
      * @return 文章实体类的List
      */
@@ -23,7 +31,7 @@ public interface ArticleDao {
      * @param id 文章ID
      * @return 包含被查询文章的List
      */
-    public List getArticleById(Integer id);
+    public ArticleEntity getArticleById(Integer id);
 
     /**
      * 根据ID查询文章题目

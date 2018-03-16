@@ -1,6 +1,6 @@
 package edu.service.Impl;
 
-import edu.dao.Impl.activityDaoImpl;
+import edu.dao.Impl.ActivityDaoImpl;
 import edu.service.activityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import java.util.HashMap;
 @Service
 public class activityServiceImpl implements activityService {
     @Autowired
-    private activityDaoImpl dao;
+    private ActivityDaoImpl dao;
 
     @Override
     public ArrayList<String> getIndexIMG() {
@@ -34,7 +34,8 @@ public class activityServiceImpl implements activityService {
         return result;
     }
 
-    //    public boolean Login(String name, String pwd){
-//        return dao.Login(name, pwd);
-//    }
+    @Override
+    public String getHeadPic() {
+        return dao.getHeadPicPath();
+    }
 }
