@@ -2,22 +2,23 @@ $(function () {
     IndexIMGControl.run();
     InfoCard.run();
 
-    var handle;
-    window.addEventListener('popstate', function (event) {
-        clearTimeout(handle);
-        if (event.state != null) {
-            var func = eval(event.state['html'] + '()');
-        }
-        else {
-            $('#display-area>div').css({
-                'top': 0,
-                'transition': 'top 1600ms cubic-bezier(0.175, 0.885, 0.255, 1.12) 10ms'
-            });
-            handle = setTimeout(function () {
-                $('#display-area').empty();
-            }, 1600);
-        }
-    });
+    // var handle;
+    // window.addEventListener('popstate', function (event) {
+    //     clearTimeout(handle);
+    //     console.log(event.state);
+    //     if (event.state != null) {
+    //         var func = eval(event.state['html'] + '()');
+    //     }
+    //     else {
+    //         $('#display-area>div').css({
+    //             'top': 0,
+    //             'transition': 'top 1600ms cubic-bezier(0.175, 0.885, 0.255, 1.12) 10ms'
+    //         });
+    //         handle = setTimeout(function () {
+    //             $('#display-area').empty();
+    //         }, 1600);
+    //     }
+    // });
 });
 
 
@@ -150,26 +151,216 @@ var InfoCard = {
         blogername.css({'font-size': '' + 4.5 * size * (width / 230) + 'em'});
     }
     ,
-    blur_control:function () {
+    blur_control: function () {
         var info_card = $('#info-card');
         var width = info_card.width();
         var height = info_card.height();
         var top = info_card.position()['top'];
-        var margin_left =  (info_card.outerWidth(true) - width) / 2;
+        var margin_left = (info_card.outerWidth(true) - width) / 2;
         $('#info-card-background-container').css({
-            'width':width,
-            'height':height,
-            'top':top,
-            'margin-left':margin_left
+            'width': width,
+            'height': height,
+            'top': top,
+            'margin-left': margin_left
         })
 
     }
 };
 
+$(function () {
+    page_switch_control.next_back_control();
+});
 
 var page_switch_control = {
+    cache: {},
+    next_back_control: function () {
+        window.addEventListener('popstate', function (event) {
+            var pre_url = page_switch_control.cache['pre_url'];
+            //后退要执行state中的back函数，back函数可以把添加的内容去掉
+            if (pre_url == null || event.state == null || pre_url.length > window.location.href.length) {//back
+                //后退动作
+                if (event.state == null) {
+                    page_switch_control.blog_page_disappear();
+                }
+                else {
+                    eval(event.state['html']['back'] + "()");
+                }
+                if (event.state != null && event.state['html']['back'] != "")
+                    console.log('back,the function is ' + event.state['html']['back'] + '()');
+            }
+            else {
+                eval(event.state['html']['forward'] + "()");
+                console.log('forward,the function is ' + event.state['html']['back'] + '()');
+            }
+            page_switch_control.cache['pre_url'] = window.location.href;
+        });
+    },
+    url_route: function (new_url, new_title, html) {
+        var state = {
+            url: window.document.location.href,
+            title: window.document.title,
+            html: html
+        };
+        window.history.pushState(state, new_title, new_url);
+    },
+    load_blog_page: function () {
+
+        if (page_switch_control.cache['blog_page'] != null) {
+            data = page_switch_control.cache['blog_page'];
+            load_object.blog_page(data);
+        }
+        else {
+            $.ajax({
+                dataType: 'html',
+                url: '/getDisplayArea.form',
+                success: function (data) {
+                    page_switch_control.cache['blog_page'] = data;
+                    load_object.blog_page(data);
+                    page_switch_control.url_route(
+                        window.document.location.href + 'blog',
+                        'leehaoze\'s blog',
+                        {
+                            'forward': 'page_switch_control.load_blog_page',//前进到这一页面执行的函数名
+                            'back': ''//后退到这一页面执行的函数
+                        }
+                    )
+                }
+            })
+        }
+
+        $(window).resize(function () {
+            var background_height = $('#background-color').height();
+            $('#main-content').css({
+                'top': '-' + (background_height + $('#info-card').height() - window.innerHeight * 0.02),
+                'transition': 'top 1600ms cubic-bezier(0.175, 0.885, 0.255, 1.12) 10ms'
+            });
+        });
+
+        if (page_switch_control.cache['head_pic'] != null) {
+            var data = page_switch_control.cache['head_pic'];
+            load_object.head_pic(data);
+        }
+        else {
+            $.ajax({
+                dataType: 'text',
+                url: '/getHeadPic.form',
+                success: function (data) {
+                    page_switch_control.cache['head_pic'] = data;
+                }
+            })
+        }
+
+
+        if (page_switch_control.cache['type_menu'] != null) {
+            var data = page_switch_control.cache['type_menu'];
+            load_object.type_menu(data)
+        }
+        else {
+            $.ajax({
+                dataType: 'json',
+                url: '/getAllTypes.form',
+                success: function (data) {
+                    page_switch_control.cache['type_menu'] = data;
+                    load_object.type_menu(data)
+                }
+            })
+        }
+    },
+    blog_page_disappear: function () {
+        // $('#display-area>div').animate({'top': 0}, 1600, 'linear', function () {
+        //     $('#display-area').empty();
+        // });
+        $('#display-area>div').css({
+            'top': 0,
+            'transition': 'top 2600ms cubic-bezier(0.175, 0.885, 0.255, 1.12) 10ms'
+        });
+        $('#display-area>div').one('transitionend', function(){
+            $('#display-area').empty();
+        });
+        // $('#display-area>div').bind('transitionend',function () { $('#display-area').empty(); })
+    },
+    load_article_list: function (type_id) {
+        if (page_switch_control.cache['articile_list_of_' + type_id] != null) {
+            var data = page_switch_control.cache['articile_list_of_' + type_id];
+            load_object.article_list(data);
+        }
+        else {
+            $.ajax({
+                dataType: 'json',
+                url: '/getArticleList/' + type_id + '.form',
+                success: function (data) {
+                    page_switch_control.cache['articile_list_of_' + type_id] = data;
+                    load_object.article_list(data);
+                    page_switch_control.url_route(
+                        window.document.location.href + '/type#' + type_id,
+                        null,
+                        '#type-' + type_id
+                    )
+                }
+            })
+        }
+    }
+};
+
+
+var load_object = {
+    blog_page: function (data) {
+        $('#display-area').append(data);
+        $('#display-area>div').unbind();
+        var background_height = $('#background-color').height();
+        $('#main-content').css({
+            'top': '-' + (background_height + $('#info-card').height() - window.innerHeight * 0.02),
+            'transition': 'top 1600ms cubic-bezier(0.175, 0.885, 0.255, 1.12) 10ms'
+        });
+    },
+    head_pic: function (data) {
+        $('#head-pic-small').css({
+            'background': 'url(' + data + ')  no-repeat center',
+            'background-size': 'cover'
+        });
+    },
+    type_menu: function (data) {
+        $('.type').each(function () {
+            $(this).remove();
+        })
+        for (var i = 0; i < data.length; ++i) {
+            var value = data[i];
+            $('#menu-content').append(
+                '<span class="type" id="type-' + value['id'] + '">' +
+                '<img src="IMG/' + value['picPath'] + '" style="width: 23px;margin-right: 8px;">' +
+                '<span>' + value['name'] + '</span>' +
+                '<span class="type-id" style="display: none">' + value['id'] + '</span>' +
+                '</span>'
+            )
+        }
+        $('.type').each(function () {
+            $(this).click(function () {
+                page_switch_control.load_article_list($(this).find('.type-id').text());
+            })
+        })
+    },
+    article_list: function (data) {
+        $('#article-list').empty();
+        for (var i = 0; i < data.length; ++i) {
+            var value = data[i];
+            $('#article-list').append(
+                '<span class="article-title" style="left:' + (i + 2) * 70 + 'px;">' +
+                '<span class="article-name">' + value['title'] + '</span>' +
+                '<span class="article-id" style="display: none">' + value['id'] + '</span>' +
+                '</span>'
+            )
+        }
+        $('.article-title').each(function () {
+            $(this).animate({
+                'left': 0
+            }, 400)
+        })
+    }
+};
+
+var page_switch_control_new = {
     load_blog_page: function (replay) {
-        $('#display-area').load(window.document.location.href+"getDisplayArea.form", function () {
+        $('#display-area').load("/getDisplayArea.form", function () {
             var background_height = $('#background-color').height();
             $('#main-content').css({
                 'top': '-' + (background_height + $('#info-card').height() - window.innerHeight * 0.02),
@@ -183,19 +374,19 @@ var page_switch_control = {
                     title: window.document.title,
                     html: 'page_switch_control.load_blog_page'
                 };
-                window.history.pushState(state, null, window.document.location.href+"/blog");
-
-                blog_page_control.page_resize();
-                blog_page_control.load_head_pic();
-                blog_page_control.load_type_menu();
+                window.history.pushState(state, null, window.document.location.href + "blog");
             }
+            blog_page_control.page_resize(replay);
+            blog_page_control.load_head_pic(replay);
+            blog_page_control.load_type_menu(replay);
         });
     }
 };
 
 
 var blog_page_control = {
-    page_resize : function () {
+    cache: {},
+    page_resize: function () {
         $(window).resize(function () {
             var background_height = $('#background-color').height();
             $('#main-content').css({
@@ -204,68 +395,87 @@ var blog_page_control = {
             });
         })
     },
-    load_head_pic : function () {
-        $.ajax({
-            dataType:'text',
-            url:'/getHeadPic.form',
-            success:function (data) {
-                $('#head-pic-small').css({
-                    'background':'url('+data+')  no-repeat center',
-                    'background-size': 'cover'
-                })
-            }
-        })
-    },
-    load_type_menu :function () {
-        $.ajax({
-            dataType : 'json',
-            url:'/getAllTypes.form',
-            success:function (data) {
-                $.each(data,function (index,value) {
-                    $('#menu-content').append(
-                        '<span class="type">' +
-                            '<img src="'+value['picPath']+'">' +
-                            '<span>'+value['name']+'</span>' +
-                            '<span class="type-id" style="display: none">'+value['id']+'</span>' +
-                        '</span>'
-                    )
-                });
-                blog_page_control.register_type_menu_click();
-            }
-        })
-    },
-    register_type_menu_click:function () {
-        $('.type').each(function () {
-            $(this).click(function () {
-                var type_id = $(this).find('.type-id').text();
-                $.ajax({
-                    dataType:'json',
-                    url:'/getArticleList/'+type_id+'.form',
-                    success:function (data) {
-                        $('#article-list').empty();
-                        $.each(data,function (index,value) {
-                            $('#article-list').append(
-                                '<span class="article-title">' +
-                                '<span class="article-name">'+ value['title'] +'</span>' +
-                                '<span class="article-id" style="display: none">'+value['id']+'</span>' +
-                                '</span>'
-                            )
-                        });
-                        blog_page_control.register_article_menu_click();
-                    }
-                })
-
+    load_head_pic: function (replay) {
+        if (replay) {
+            $('#head-pic-small').css({
+                'background': 'url(' + blog_page_control.cache['head_pic'] + ')  no-repeat center',
+                'background-size': 'cover'
             })
-        })
+        }
+        else {
+            $.ajax({
+                dataType: 'text',
+                url: '/getHeadPic.form',
+                success: function (data) {
+                    $('#head-pic-small').css({
+                        'background': 'url(' + data + ')  no-repeat center',
+                        'background-size': 'cover'
+                    });
+                    blog_page_control.cache['head_pic'] = data;
+                }
+            })
+        }
     },
-    register_article_menu_click:function () {
+    load_type_menu: function (repaly) {
+        if (!repaly) {
+            $.ajax({
+                dataType: 'json',
+                url: '/getAllTypes.form',
+                success: function (data) {
+                    blog_page_control.cache['type_data'] = data;
+
+                }
+            })
+        }
+        else {
+            for (var i = 0; i < blog_page_control.cache['type_data'].length; ++i) {
+                var value = blog_page_control.cache['type_data'][i];
+                $('#menu-content').append(
+                    '<span class="type">' +
+                    '<img src="IMG/' + value['picPath'] + '" style="width: 23px;margin-right: 8px;">' +
+                    '<span>' + value['name'] + '</span>' +
+                    '<span class="type-id" style="display: none">' + value['id'] + '</span>' +
+                    '</span>'
+                )
+            }
+            blog_page_control.register_type_menu_click();
+        }
+    },
+    register_type_menu_click: function (reclick_type_id) { //再前进后退是要模拟用户点击了某个Type
+        if (reclick_type_id = null) {
+            $('.type').each(function () {
+                $(this).click(function () {
+                    var type_id = $(this).find('.type-id').text();
+                    $.ajax({
+                        dataType: 'json',
+                        url: '/getArticleList/' + type_id + '.form',
+                        success: function (data) {
+                            $('#article-list').empty();
+                            $.each(data, function (index, value) {
+                                $('#article-list').append(
+                                    '<span class="article-title">' +
+                                    '<span class="article-name">' + value['title'] + '</span>' +
+                                    '<span class="article-id" style="display: none">' + value['id'] + '</span>' +
+                                    '</span>'
+                                )
+                            });
+                            blog_page_control.register_article_menu_click();
+                        }
+                    })
+                })
+            })
+        } else {
+
+        }
+    },
+    register_article_menu_click: function () {
         $('.article-title').each(function () {
             $(this).click(function () {
                 var article_id = $(this).find('.article-id').text();
                 $.ajax({
-                    dataType:'json',
-                    url:'/getArticle/'+article_id+'.form',
-                    success:function (data) {
+                    dataType: 'json',
+                    url: '/getArticle/' + article_id + '.form',
+                    success: function (data) {
                         console.log(data)
                         $('#line-three').append(data['content']);
                     }
